@@ -1,0 +1,106 @@
+#! /usr/bin/env python
+import googletrans
+import pyfiglet
+import sys
+import time
+import datetime
+import pendulum
+import pytz
+from googletrans import Translator
+import colorama
+from colorama import Fore, Back, Style
+colorama.init()
+
+
+try:
+    print(Fore.MAGENTA)
+    utc = pytz.utc
+    ist = pendulum.timezone('Asia/Calcutta')
+    now = datetime.datetime.now()
+    print ("Current date and time : ")
+    print (now.strftime("%Y-%B-%d %H:%M:%S"))
+    currentTime = datetime.datetime.now()
+    currentTime.hour
+    if currentTime.hour < 12:
+        print("Good Morning")
+    elif 12 <= currentTime.hour < 18:
+        print('Good afternoon.')
+    else:
+        print('Good evening.')
+    print('')
+    print('Current Date Time in UTC =', datetime.datetime.now(tz=utc))
+    print('Current Date Time in IST =', datetime.datetime.now(ist))
+    print(Style.RESET_ALL)
+
+
+except Exception as ex:
+    print(Fore.RED)
+    print("Something Went Wrong From Date Time Section")
+    print(ex)
+    print(Style.RESET_ALL)
+
+try:
+    res = pyfiglet.figlet_format("     Translator", font="bulbhead")
+    print(Fore.RED)
+    print(res)
+    time.sleep(2)
+    print('')
+    print('')
+    input("Press ENTER To Continue.........")
+    print(Style.RESET_ALL)
+    print("")
+    print("")
+except Exception as ex2:
+    print(Fore.RED)
+    print("Something Went Wrong From PyFiglet")
+    print(ex2)
+    print(Style.RESET_ALL)
+
+
+
+
+
+
+try:
+    translator = Translator()
+    langs = googletrans.LANGUAGES
+
+    print("Codes"+ "       " + "Languages")
+    print(Fore.YELLOW)
+    for key, value in langs.items():
+        print(key + "       " +  value)
+        time.sleep(0.1)
+    print(Style.RESET_ALL)
+
+    print("")
+    print("")
+    print("")
+
+
+    text =input("Enter The Full Text You Want To Translate: ")
+    destniation = input("Enter The Destination language Code from Above: ")
+
+
+    if destniation not in langs.keys():
+        print(Fore.RED)
+        sys.exit('Key Not Presnt')
+        print(Style.RESET_ALL)
+
+    dt1 = translator.detect(text)
+    translated = translator.translate(text, dest=destniation)
+    time.sleep(1)
+    print("")
+    print('')
+    print('')
+
+    print("##########################################################")
+    print(Fore.YELLOW)
+    print(dt1)
+    print(translated.text)
+    print(Style.RESET_ALL)
+    print("##########################################################")
+    print('')
+    print('')
+except Exception as ex3:
+    print("Something Went Wrong From Translator Section...")
+    print(ex3)
